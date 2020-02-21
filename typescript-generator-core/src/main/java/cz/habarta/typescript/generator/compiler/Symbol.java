@@ -46,9 +46,14 @@ public class Symbol {
             simpleName = namespacedName.substring(index + 1);
         }
     }
-
+    
     void addSuffix(String suffix) {
         simpleName = simpleName + suffix;
+    }
+
+    @Override
+    public String toString() {
+        return getFullName();
     }
 
 }
