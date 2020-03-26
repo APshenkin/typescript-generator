@@ -36,6 +36,10 @@ public class DirectoryEmitter extends Emitter {
         super(settings);
     }
 
+    public Output getOutput() {
+        return output;
+    }
+
     @Override
     public void emit(TsModel model, Writer output, String outputName, boolean closeOutput, boolean forceExportKeyword, int initialIndentationLevel) {
         initSettings(output, forceExportKeyword, initialIndentationLevel);
@@ -152,17 +156,10 @@ public class DirectoryEmitter extends Emitter {
             if (emitterExtension instanceof DirectoryEmitterExtension) {
                 DirectoryEmitterExtension directoryEmitter = (DirectoryEmitterExtension) emitterExtension;
 
-                final List<String> extensionLines = new ArrayList<>();
-                final EmitterExtension.Writer extensionWriter = line -> extensionLines.add(line);
-                directoryEmitter.emitElement(extensionWriter, settings, exportKeyword, model, declaration);
-                if (!extensionLines.isEmpty()) {
-                    writeNewLine();
-                    writeNewLine();
-                    writeIndentedLine(String.format("// Added by '%s' extension", emitterExtension.getClass().getSimpleName()));
-                    for (String line : extensionLines) {
-                        this.writeIndentedLine(line);
-                    }
-                }
+                writeNewLine();
+                writeNewLine();
+                writeIndentedLine(String.format("// Added by '%s' extension", emitterExtension.getClass().getSimpleName()));
+                directoryEmitter.emitElement(this, settings, exportKeyword, model, declaration);
             }
         }
     }
