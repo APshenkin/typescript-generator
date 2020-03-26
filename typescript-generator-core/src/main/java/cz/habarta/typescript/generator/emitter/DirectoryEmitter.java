@@ -155,11 +155,19 @@ public class DirectoryEmitter extends Emitter {
         for (EmitterExtension emitterExtension : settings.extensions) {
             if (emitterExtension instanceof DirectoryEmitterExtension) {
                 DirectoryEmitterExtension directoryEmitter = (DirectoryEmitterExtension) emitterExtension;
+                directoryEmitter.setOutput(output);
 
-                writeNewLine();
-                writeNewLine();
-                writeIndentedLine(String.format("// Added by '%s' extension", emitterExtension.getClass().getSimpleName()));
-                directoryEmitter.emitElement(this, settings, exportKeyword, model, declaration);
+                final List<String> extensionLines = new ArrayList<>();
+                final EmitterExtension.Writer extensionWriter = line -> extensionLines.add(line);
+                directoryEmitter.emitElement(extensionWriter, settings, exportKeyword, model, declaration);
+                if (!extensionLines.isEmpty()) {
+                    writeNewLine();
+                    writeNewLine();
+                    writeIndentedLine(String.format("// Added by '%s' extension", emitterExtension.getClass().getSimpleName()));
+                    for (String line : extensionLines) {
+                        this.writeIndentedLine(line);
+                    }
+                }
             }
         }
     }
