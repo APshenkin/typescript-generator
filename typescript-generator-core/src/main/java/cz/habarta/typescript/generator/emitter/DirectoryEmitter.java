@@ -123,7 +123,7 @@ public class DirectoryEmitter extends Emitter {
     }
 
     private String convertTypeScriptFileName(String simpleName) {
-        return simpleName.replaceAll("(.)(\\p{Upper})", "$1-$2").toLowerCase();
+        return Character.toLowerCase(simpleName.charAt(0)) + simpleName.substring(1);
     }
 
     private String calculateImportPath(Symbol basePath, ReferenceType refType) {
