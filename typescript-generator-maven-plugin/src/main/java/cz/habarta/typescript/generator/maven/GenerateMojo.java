@@ -61,6 +61,12 @@ public class GenerateMojo extends AbstractMojo {
     private TypeScriptFileType outputFileType;
 
     /**
+     * Output multiple files instead of generating all output in a single file.
+     */
+    @Parameter
+    private boolean outputMultipleFiles;
+
+    /**
      * Kind of generated TypeScript output. Allowed values are:
      * <ul>
      * <li><code>global</code> - means that declarations will be in global scope or namespace (no module)</li>
@@ -688,7 +694,7 @@ public class GenerateMojo extends AbstractMojo {
     /**
      * If <code>true</code> JSON file describing generated module will be generated.
      * In following typescript-generator run this allows to generate another module which could depend on currently generated module.
-     * Generated JSON file contains mapping from Java classes to TypeScript types which typescript-generator needs 
+     * Generated JSON file contains mapping from Java classes to TypeScript types which typescript-generator needs
      * when the module is referenced from another module using {@link #moduleDependencies} parameter.
      * Only applicable when {@link #outputKind} is set to <code>module</code>.
      */
@@ -810,6 +816,7 @@ public class GenerateMojo extends AbstractMojo {
         if (outputFileType != null) {
             settings.outputFileType = outputFileType;
         }
+        settings.outputMultipleFiles = outputMultipleFiles;
         settings.outputKind = outputKind;
         settings.module = module;
         settings.namespace = namespace;
