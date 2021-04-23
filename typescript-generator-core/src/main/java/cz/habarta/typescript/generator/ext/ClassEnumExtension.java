@@ -22,11 +22,13 @@ public class ClassEnumExtension extends Extension {
 
     public static final String CFG_CLASS_ENUM_PATTERN = "classEnumPattern";
 
-    private String classEnumPattern = "ClassEnum";
+    private String classEnumPattern = "Enum";
 
     @Override
     public EmitterExtensionFeatures getFeatures() {
-        return new EmitterExtensionFeatures();
+        final EmitterExtensionFeatures features = new EmitterExtensionFeatures();
+        features.worksWithPackagesMappedToNamespaces = true;
+        return features;
     }
 
     @Override
