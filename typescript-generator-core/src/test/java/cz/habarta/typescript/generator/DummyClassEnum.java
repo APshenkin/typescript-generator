@@ -6,9 +6,9 @@ import java.util.Objects;
 
 public class DummyClassEnum {
 
-    public static final DummyClassEnum ATYPE  = new DummyClassEnum("ATYPE");
-    public static final DummyClassEnum BTYPE  = new DummyClassEnum("BTYPE");
-    public static final DummyClassEnum CTYPE  = new DummyClassEnum("CTYPE");
+    public static final DummyClassEnum ATYPE  = new DummyClassEnum("a-type");
+    public static final DummyClassEnum BTYPE  = new DummyClassEnum("b-type");
+    public static final DummyClassEnum CTYPE  = new DummyClassEnum("c-type");
 
     private final String value;
 

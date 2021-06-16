@@ -56,7 +56,11 @@ public class ClassEnumExtension extends Extension {
                     List<EnumMemberModel> members = new ArrayList<>();
                     for (Field declaredField : tsBeanModel.getOrigin().getDeclaredFields()) {
                         if (declaredField.getType().getName().equals(tsBeanModel.getOrigin().getName())) {
-                            members.add(new EnumMemberModel(declaredField.getName(), declaredField.getName(), null));
+                            String value = declaredField.getName();
+                            try {
+                               value = declaredField.get(declaredField.getClass()).toString();
+                            } catch (IllegalAccessException ignored) { }
+                            members.add(new EnumMemberModel(declaredField.getName(), value, null));
                         }
                     }
                     TsEnumModel temp = new TsEnumModel(

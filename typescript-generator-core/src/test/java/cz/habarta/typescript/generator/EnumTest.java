@@ -110,9 +110,9 @@ public class EnumTest {
         final String output = new TypeScriptGenerator(settings).generateTypeScript(Input.from(DummyEnum.class, DummyClassEnum.class));
         final String expected = (
                 "\ndeclare const enum DummyClassEnum {\n" +
-                        "    ATYPE = 'ATYPE',\n" +
-                        "    BTYPE = 'BTYPE',\n" +
-                        "    CTYPE = 'CTYPE',\n" +
+                        "    ATYPE = 'a-type',\n" +
+                        "    BTYPE = 'b-type',\n" +
+                        "    CTYPE = 'c-type',\n" +
                         "}\n" +
                 "\ndeclare const enum DummyEnum {\n" +
                         "    Red = 'Red',\n" +
@@ -233,7 +233,7 @@ public class EnumTest {
 
     enum Direction {
         North,
-        East, 
+        East,
         South,
         West
     }
